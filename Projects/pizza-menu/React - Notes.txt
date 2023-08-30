@@ -23,3 +23,21 @@ Components are functions that always start with the first letter uppercase and h
 function ComponentName() {
     return <tag>Text</tag>
 }
+
+Props are immutable.
+States are mutable.
+
+React is one-way data flow, from parent to child only.
+
+
+=======================================
+Importing CSS files
+=======================================
+import "css_file_location_and_name.css"
+
+
+======================================
+JSX syntax
+======================================
+JavaScript code should be within curly brackets: {12}, {data.prop}, {{key: value}}.
+Props are passed to the component like HTML properties: <tag prop="value"></tag>.
