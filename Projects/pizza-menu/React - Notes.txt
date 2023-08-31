@@ -20,12 +20,14 @@ Components
 =======================================
 Components are functions that always start with the first letter uppercase and have to return a SINGLE markup:
 
-function ComponentName() {
+function ComponentName(props) {
     return <tag>Text</tag>
 }
 
 Props are immutable.
 States are mutable.
+
+All components have the props argument even if it's empty.
 
 React is one-way data flow, from parent to child only.
 
@@ -43,3 +45,5 @@ JavaScript code should be within curly brackets: {12}, {data.prop}, {{key: value
 Props are passed to the component like HTML properties: <tag prop="value"></tag>.
 Statement like if/else, for, switch, are not allowed.
 Only expression are allowed.
+Only one HTML wrapper is allowed. To wrap more than one the React Fragment is used: <></>.
+React Fragment longer version to put keys: <React.Fragment></React.Fragment>.
