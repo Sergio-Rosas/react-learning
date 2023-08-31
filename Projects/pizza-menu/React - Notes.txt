@@ -41,3 +41,5 @@ JSX syntax
 ======================================
 JavaScript code should be within curly brackets: {12}, {data.prop}, {{key: value}}.
 Props are passed to the component like HTML properties: <tag prop="value"></tag>.
+Statement like if/else, for, switch, are not allowed.
+Only expression are allowed.
