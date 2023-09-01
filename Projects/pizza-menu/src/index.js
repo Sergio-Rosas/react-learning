@@ -131,7 +131,7 @@ function Footer() {
                 <Order closeHour={closeHour} openHour={openHour} />
             ) : (
                 <p>
-                    We're happy to weocome you between {openHour}:00 and{" "}
+                    We're happy to welcome you between {openHour}:00 and{" "}
                     {closeHour}:00.
                 </p>
             )}

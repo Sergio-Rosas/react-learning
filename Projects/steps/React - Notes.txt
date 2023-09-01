@@ -33,6 +33,15 @@ React is one-way data flow, from parent to child only.
 
 
 =======================================
+State
+======================================
+It's data the component can hold over time.
+It comprises 3 steps: variable creation, use it and update it in an event.
+import { useState } from "react"
+const|let|var [variable, setFunction] = useState(defaultValue);
+
+
+=======================================
 Importing CSS files
 =======================================
 import "css_file_location_and_name.css"
@@ -47,3 +56,16 @@ Statement like if/else, for, switch, are not allowed.
 Only expression are allowed.
 Only one HTML wrapper is allowed. To wrap more than one the React Fragment is used: <></>.
 React Fragment longer version to put keys: <React.Fragment></React.Fragment>.
+
+
+======================================
+Events
+======================================
+The events are handled like inline events on HTML but the event should be on camelcase: onClick={func}, onLoad={func}, etc.
+
+
+=====================================
+Hooks
+=====================================
+All hooks start with "use": useState, useEffect, etc.
+They can only be used at the beginning of the function, not inside any statement like if/else, while, etc.
