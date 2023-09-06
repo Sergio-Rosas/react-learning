@@ -31,6 +31,10 @@ States are mutable.
 
 All components have the props argument even if it's empty.
 
+CHILDREN PROP
+It's the content that is between the open and close tag on a component: <Component>Children prop</Component>.
+It's passed with the "children" keyword to the component props list.
+
 React is one-way data flow, from parent to child only.
 
 
