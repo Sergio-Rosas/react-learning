@@ -24,7 +24,9 @@ function ComponentName(props) {
     return <tag>Text</tag>
 }
 
-Props are immutable.
+Props are immutable (read-only).
+Props are external data passed by the parent component.
+Receiving new props causes the component to re-render.
 States are mutable.
 
 All components have the props argument even if it's empty.
@@ -35,10 +37,23 @@ React is one-way data flow, from parent to child only.
 =======================================
 State
 ======================================
-It's data the component can hold over time.
+It's internal data the component can hold over time.
 It comprises 3 steps: variable creation, use it and update it in an event.
 import { useState } from "react"
 const|let|var [variable, setFunction] = useState(defaultValue);
+It's updated by the component itself.
+When the state is updated the component is re-rendered.
+Start always from local state and move to global only if needed.
+
+DERIVED STATE:
+A constant that depends on a piece of state.
+Derived states are created when states that can be obtained from other states are converted to simple variables.
+
+STATE MANAGEMENT:
+When to create it.
+What type.
+Where to place it.
+How the data flows.
 
 
 =======================================
@@ -69,3 +84,12 @@ Hooks
 =====================================
 All hooks start with "use": useState, useEffect, etc.
 They can only be used at the beginning of the function, not inside any statement like if/else, while, etc.
+
+
+====================================
+Thinking in React
+====================================
+1. Breaking down the app in components and their relationship.
+2. Building the static app.
+3. Thinking about the state.
+4. Data flow.
