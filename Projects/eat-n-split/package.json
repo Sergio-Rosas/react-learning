@@ -1,5 +1,5 @@
 {
-  "name": "react-learning",
+  "name": "eat-n-split",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +17,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {},
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -29,9 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint": "7.14.0",
-    "prettier": "^3.0.3"
   }
 }
