@@ -19,6 +19,7 @@ root.render(<React.StrictMode><App /></React.StrictMode>);
 Components
 =======================================
 Components are functions that always start with the first letter uppercase and have to return a SINGLE markup:
+When a component is used, that is called a Component Instance.
 
 function ComponentName(props) {
     return <tag>Text</tag>
@@ -37,6 +38,11 @@ It's passed with the "children" keyword to the component props list.
 
 React is one-way data flow, from parent to child only.
 
+COMPONENT COMPOSITION
+It's when the children prop is used to pass a component, that way the parent component is reusable and the child component
+is not dependant of the parent component.
+
+When a Component Instance is used, a React Element is created. That is what will render the Dom Element.
 
 =======================================
 State
@@ -97,3 +103,29 @@ Thinking in React
 2. Building the static app.
 3. Thinking about the state.
 4. Data flow.
+
+
+====================================
+React Behind the Scenes
+====================================
+Rendering process:
+1) Render is triggered:
+    - Initial render of the app OR
+    - State is updated: that process is triggered for the entire application.
+2) Render phase:
+    - Take all Component Instances that triggered a re-render
+    - That creates new React Elements that create a new React Element Tree (also called a Virtual DOM):
+        - The React Element Tree is a cheap version of the DOM is a JavaScript Object.
+        - All children Components of the Component that needs re-rendering are re-rendered too.
+    - Reconciliation and Diffing are made:
+        - The reconciler is called the Fiber Tree. The reconciliation is the process in which React knows which DOM
+        elements need to be inserted, deleted, or updated, because writing to the actual DOM is inefficient. The reconciler
+        is the heart of React. The Fiber Tree is mutable and is not re-rendered. It keeps track of all changes in the React
+        App. It is composed of a linked list, works asynchronously, and has a queue of work.
+        - The diffing occurs, that is the compare of elements based on their position in the tree.
+        - An updated Fiber Tree is created with a list of DOM updates (list of effects).
+3) Commit phase:
+    - The DOM is updated with the list of effects on the previous phase. It is done in one go. It is performed by the
+    library called ReactDOM.
+4) Browser pain:
+    - When the browser knows the DOM was updated it updates the UI in the screen.
