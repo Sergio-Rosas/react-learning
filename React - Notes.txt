@@ -77,10 +77,20 @@ Effects
 The effects are side effects, things that occur outside the component. Due to the React nature of being
 pure functional, the hook useEffect is used to process that kind of side effects.
 That hook is used to handle side effects during the component lifecycle and to keep it synchronized with the external world.
+Effects fun after every render by default.
 
 useEffect(func () {
     ...
 }, dependencyArray)
+
+The dependency array is composed of every state variable and prop that is used inside.
+Those dependencies indicate when to run the effect: if one of them change, the effect will run again.
+
+If an array is provided, the effect will run on mount and in every re-render triggered by the array items.
+If an empty array is provided, the effect will run only on mount.
+If no array is provided, the effect will run on every re-render.
+
+The effects run after the Browser is Painted and if they update an state an re-render is made again.
 
 =======================================
 Importing CSS files
@@ -143,5 +153,5 @@ Rendering process:
 3) Commit phase:
     - The DOM is updated with the list of effects on the previous phase. It is done in one go. It is performed by the
     library called ReactDOM.
-4) Browser pain:
+4) Browser paint:
     - When the browser knows the DOM was updated it updates the UI in the screen.
