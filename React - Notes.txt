@@ -44,6 +44,11 @@ is not dependant of the parent component.
 
 When a Component Instance is used, a React Element is created. That is what will render the Dom Element.
 
+COMPONENT LIFECYCLE
+1) Mount (The initial render, when the states and props are created).
+2) Re-render (Optional; it happens when the state, the props changes or the context changes, or when the parent is re-rendered).
+3) Unmount (The instance is destroyed and removed; all states and props are also destroyed).
+
 =======================================
 State
 ======================================
@@ -65,6 +70,17 @@ What type.
 Where to place it.
 How the data flows.
 
+
+=======================================
+Effects
+=======================================
+The effects are side effects, things that occur outside the component. Due to the React nature of being
+pure functional, the hook useEffect is used to process that kind of side effects.
+That hook is used to handle side effects during the component lifecycle and to keep it synchronized with the external world.
+
+useEffect(func () {
+    ...
+}, dependencyArray)
 
 =======================================
 Importing CSS files
