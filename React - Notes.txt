@@ -90,7 +90,7 @@ If an array is provided, the effect will run on mount and in every re-render tri
 If an empty array is provided, the effect will run only on mount.
 If no array is provided, the effect will run on every re-render.
 
-The effects run after the Browser is Painted and if they update an state an re-render is made again.
+The effects run after the Browser is Painted and if they update a state a re-render is made again.
 
 =======================================
 Importing CSS files
