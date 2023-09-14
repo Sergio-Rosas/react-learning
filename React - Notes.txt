@@ -91,6 +91,8 @@ If an empty array is provided, the effect will run only on mount.
 If no array is provided, the effect will run on every re-render.
 
 The effects run after the Browser is Painted and if they update a state a re-render is made again.
+The effects have an optional clean-up function that runs before the effect is called again and after the component in unmounted.
+The clean-up function is declared in a return statement.
 
 =======================================
 Importing CSS files
@@ -118,8 +120,11 @@ The events are handled like inline events on HTML but the event should be on cam
 =====================================
 Hooks
 =====================================
-All hooks start with "use": useState, useEffect, etc.
+Hooks are functions that allow to interact with React internals.
+All hooks start with "use": useState, useEffect, useReducer, useContext, useRef, useCallback, useMemo, useTransition,
+    useDeferredValue (useLayoutEffect, useDebugValue, useImperativeHandle, useId, useExternalStore, useInsertionEffect).
 They can only be used at the beginning of the function, not inside any statement like if/else, while, etc.
+Custom hooks can be created.
 
 
 ====================================
