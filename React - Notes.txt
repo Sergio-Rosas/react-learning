@@ -174,3 +174,42 @@ Rendering process:
     library called ReactDOM.
 4) Browser paint:
     - When the browser knows the DOM was updated it updates the UI in the screen.
+
+
+====================================
+React Class Approach
+====================================
+The old React used JavaScript classes that inherited from React.Component to create components.
+Inside the component the "render()" function returns the JSX and handle simple logic.
+Each component is a normal class so it has to have its constructor with the props as argument, call the super method and define its variables.
+Functions are created and treated as methods.
+Methods lose the binding to "this" so they have to be binded in the constructor.
+The state is a giant object that containes all state values.
+
+
+import React from "react";
+
+class ComponentName extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { key: value };
+        this.method = this.method.bind(this);
+    }
+
+    method() {
+        this.setState((value) => {
+            return { key: value };
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.method}>text</button>
+            </div>
+        );
+    }
+}
+
+export default ComponentName;
