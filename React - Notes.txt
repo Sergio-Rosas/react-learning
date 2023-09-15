@@ -59,6 +59,8 @@ const|let|var [variable, setFunction] = useState(defaultValue);
 It's updated by the component itself.
 When the state is updated the component is re-rendered.
 Start always from local state and move to global only if needed.
+As default value it receives pure functions without arguments too.
+The default value will only be used on mount.
 
 DERIVED STATE:
 A constant that depends on a piece of state.
@@ -94,6 +96,16 @@ The effects run after the Browser is Painted and if they update a state a re-ren
 The effects have an optional clean-up function that runs before the effect is called again and after the component in unmounted.
 The clean-up function is declared in a return statement.
 
+
+=======================================
+Reference
+=======================================
+The useRef() hook is used to preserve information across renders.
+It's a mutable box that can be changed with the ".current" method.
+It can also contain DOM elements.
+The biggest difference between useState and useRef is that useRef doesn't re-render the component if it changes.
+
+
 =======================================
 Importing CSS files
 =======================================
@@ -126,6 +138,8 @@ All hooks start with "use": useState, useEffect, useReducer, useContext, useRef,
 They can only be used at the beginning of the function, not inside any statement like if/else, while, etc.
 Custom hooks can be created.
 
+CUSTOM HOOKS
+They can be created to reuse non-visual logic that has hooks inside it.
 
 ====================================
 Thinking in React
