@@ -107,6 +107,21 @@ The biggest difference between useState and useRef is that useRef doesn't re-ren
 
 
 =======================================
+Reducer
+=======================================
+The useReducer() hook is a state hook with a pure function reducer.
+The useReducer takes as arguments the reducer function and the initial state:
+    const [state, dispatch] = useReducer(function, initialState);
+The function that is passed to the useReducer hook have 2 arguments, the current state and the action. The dispatcher
+function set the action argument:
+    function name(state, action) {}
+    dispatch({type: "value", payload: "value"});
+
+useReducer() is used to handle complicated state management, so it's encouraged to have complicated logic inside it.
+
+It's recommended to use useReducer() for multiple related pieces of state and complex state.
+
+=======================================
 Importing CSS files
 =======================================
 import "css_file_location_and_name.css"
@@ -213,3 +228,14 @@ class ComponentName extends React.Component {
 }
 
 export default ComponentName;
+
+
+====================================
+Libraries
+====================================
+
+REACT ROUTER:
+To route different components to different views.
+
+CSS MODULES:
+To use CSS by component.
