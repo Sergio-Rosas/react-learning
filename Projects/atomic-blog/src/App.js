@@ -1,6 +1,6 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {faker} from "@faker-js/faker";
-import {PostProvider, PostContext} from "./PostContext";
+import { useEffect, useState } from "react";
+import { faker } from "@faker-js/faker";
+import { PostProvider, usePosts } from "./PostContext";
 
 function createRandomPost() {
     return {
@@ -20,28 +20,26 @@ function App() {
     );
 
     return (
-        <PostProvider>
-            <section>
-                <button
-                    onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
-                    className="btn-fake-dark-mode"
-                >
-                    {isFakeDark ? "☀️" : "🌙"}
-                </button>
+        <section>
+            <button
+                onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
+                className="btn-fake-dark-mode"
+            >
+                {isFakeDark ? "☀️" : "🌙"}
+            </button>
 
-                <Header/>
-                <Main/>
-                <Archive/>
-                <Footer/>
-            </section>
-
-        </PostProvider>
-
+            <PostProvider>
+                <Header />
+                <Main />
+                <Archive />
+                <Footer />
+            </PostProvider>
+        </section>
     );
 }
 
 function Header() {
-    const {onClearPosts} = useContext(PostContext)
+    const { onClearPosts } = usePosts();
 
     return (
         <header>
@@ -49,8 +47,8 @@ function Header() {
                 <span>⚛️</span>The Atomic Blog
             </h1>
             <div>
-                <Results/>
-                <SearchPosts/>
+                <Results />
+                <SearchPosts />
                 <button onClick={onClearPosts}>Clear posts</button>
             </div>
         </header>
@@ -58,7 +56,7 @@ function Header() {
 }
 
 function SearchPosts() {
-    const {searchQuery, setSearchQuery} = useContext(PostContext);
+    const { searchQuery, setSearchQuery } = usePosts();
 
     return (
         <input
@@ -70,7 +68,7 @@ function SearchPosts() {
 }
 
 function Results() {
-    const {posts} = useContext(PostContext);
+    const { posts } = usePosts();
 
     return <p>🚀 {posts.length} atomic posts found</p>;
 }
@@ -78,8 +76,8 @@ function Results() {
 function Main() {
     return (
         <main>
-            <FormAddPost/>
-            <Posts/>
+            <FormAddPost />
+            <Posts />
         </main>
     );
 }
@@ -87,13 +85,13 @@ function Main() {
 function Posts() {
     return (
         <section>
-            <List/>
+            <List />
         </section>
     );
 }
 
 function FormAddPost() {
-    const {onAddPost} = useContext(PostContext);
+    const { onAddPost } = usePosts();
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -101,7 +99,7 @@ function FormAddPost() {
     const handleSubmit = function (e) {
         e.preventDefault();
         if (!body || !title) return;
-        onAddPost({title, body});
+        onAddPost({ title, body });
         setTitle("");
         setBody("");
     };
@@ -124,7 +122,7 @@ function FormAddPost() {
 }
 
 function List() {
-    const {posts} = useContext(PostContext);
+    const { posts } = usePosts();
 
     return (
         <ul>
@@ -139,12 +137,12 @@ function List() {
 }
 
 function Archive() {
-    const {onAddPost} = useContext(PostContext);
+    const { onAddPost } = usePosts();
 
     // Here we don't need the setter function. We're only using state to store these posts because the callback function passed into useState (which generates the posts) is only called once, on the initial render. So we use this trick as an optimization technique, because if we just used a regular variable, these posts would be re-created on every render. We could also move the posts outside the components, but I wanted to show you this trick 😉
     const [posts] = useState(() =>
         // 💥 WARNING: This might make your computer slow! Try a smaller `length` first
-        Array.from({length: 10000}, () => createRandomPost())
+        Array.from({ length: 10000 }, () => createRandomPost())
     );
 
     const [showArchive, setShowArchive] = useState(false);
@@ -163,7 +161,9 @@ function Archive() {
                             <p>
                                 <strong>{post.title}:</strong> {post.body}
                             </p>
-                            <button onClick={() => onAddPost(post)}>Add as new post</button>
+                            <button onClick={() => onAddPost(post)}>
+                                Add as new post
+                            </button>
                         </li>
                     ))}
                 </ul>

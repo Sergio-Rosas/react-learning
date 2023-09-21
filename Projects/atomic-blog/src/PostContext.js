@@ -1,5 +1,5 @@
-import {useState, createContext} from "react";
-import {faker} from "@faker-js/faker";
+import { useState, createContext, useContext } from "react";
+import { faker } from "@faker-js/faker";
 
 function createRandomPost() {
     return {
@@ -10,9 +10,9 @@ function createRandomPost() {
 
 const PostContext = createContext(null);
 
-function PostProvider() {
+function PostProvider({ children }) {
     const [posts, setPosts] = useState(() =>
-        Array.from({length: 30}, () => createRandomPost())
+        Array.from({ length: 30 }, () => createRandomPost())
     );
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -20,10 +20,10 @@ function PostProvider() {
     const searchedPosts =
         searchQuery.length > 0
             ? posts.filter((post) =>
-                `${post.title} ${post.body}`
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase())
-            )
+                  `${post.title} ${post.body}`
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase())
+              )
             : posts;
 
     function handleAddPost(post) {
@@ -35,16 +35,26 @@ function PostProvider() {
     }
 
     return (
-        <PostContext value={{
-            posts: searchedPosts,
-            onAddPost: handleAddPost,
-            onClearPosts: handleClearPosts,
-            searchQuery,
-            setSearchQuery,
-        }}>
-
-        </PostContext>
-    )
+        <PostContext.Provider
+            value={{
+                posts: searchedPosts,
+                onAddPost: handleAddPost,
+                onClearPosts: handleClearPosts,
+                searchQuery,
+                setSearchQuery,
+            }}
+        >
+            {children}
+        </PostContext.Provider>
+    );
 }
 
-export {PostProvider, PostContext};
+function usePosts() {
+    const context = useContext(PostContext);
+
+    if (context === undefined)
+        throw new Error("PostContext was used outside of the PostProvider");
+    return context;
+}
+
+export { PostProvider, usePosts };

@@ -136,6 +136,8 @@ Usage:
     <ContextName.Provider value={{key1: values, key2: values}><ContextName.Provider/>
 3) useContext()
 
+The best practice is to create the context in its own file with all the logic and with a custom hook as the export.
+
 
 =======================================
 Importing CSS files
