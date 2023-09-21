@@ -121,6 +121,22 @@ useReducer() is used to handle complicated state management, so it's encouraged 
 
 It's recommended to use useReducer() for multiple related pieces of state and complex state.
 
+
+=======================================
+Context API
+=======================================
+useContext() is a hook used to resolve the prop drilling issue. It's a way for every child to use states at multiple parent
+levels.
+
+It is set on the parent component with "createContext()" that creates a new component.
+
+Usage:
+1) createContext()
+2) Wrap components that need the states on the new component calling the method "Provider" and passing an object with all the states:
+    <ContextName.Provider value={{key1: values, key2: values}><ContextName.Provider/>
+3) useContext()
+
+
 =======================================
 Importing CSS files
 =======================================
