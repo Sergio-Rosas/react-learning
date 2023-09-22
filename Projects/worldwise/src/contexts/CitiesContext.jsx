@@ -7,7 +7,7 @@ const CitiesContext = createContext(null);
 function CitiesProvider({ children }) {
     const [cities, setCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [currentCity, setCurrentCity] = useState();
+    const [currentCity, setCurrentCity] = useState({});
 
     useEffect(function () {
         async function fetchCities() {
@@ -60,4 +60,4 @@ function useCities() {
     return context;
 }
 
-export { CitiesProvider, useCities, getCity };
+export { CitiesProvider, useCities};
