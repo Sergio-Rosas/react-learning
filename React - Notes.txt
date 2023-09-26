@@ -359,4 +359,13 @@ Redux structure is to divide the code in feature folders, with each piece of cod
 React reduce use a Provider component that will provide all state to the app:
 <Provider store="store name"></Provider>
 To use and connect Redux with React the "useSelector" hook.
+To use the dispatch function the useDispatch hook needs to be imported. Inside the call function can be invoked.
 
+----- Thunk (Middleware) -----
+Allows to do thing after the dispatch function is called but before the values are written on the store.
+This is the perfect place for asynchronous code, API calls, timers, loggings, and side effects.
+
+Middleware is passed as an argument to the applyMiddleware function, and that function is passed to the store when created:
+const storeName = createStore(reducer, applyMiddleware(thunk)) --> this is the case the middleware is Thunk.
+
+When a action function returns a function, Redux know that function is the middleware.
