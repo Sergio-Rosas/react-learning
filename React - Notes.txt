@@ -72,6 +72,8 @@ What type.
 Where to place it.
 How the data flows.
 
+All setter functions of the useState are memoized by default.
+
 
 =======================================
 Effects
@@ -85,7 +87,8 @@ useEffect(func () {
     ...
 }, dependencyArray)
 
-The dependency array is composed of every state variable and prop that is used inside.
+The dependency array is composed of every state variable, prop, and context value that is used inside and MUST contain them.
+The dependency array MUST include any reactive values, what means, every function or variable that reference any other reactive value.
 Those dependencies indicate when to run the effect: if one of them change, the effect will run again.
 
 If an array is provided, the effect will run on mount and in every re-render triggered by the array items.
@@ -93,9 +96,15 @@ If an empty array is provided, the effect will run only on mount.
 If no array is provided, the effect will run on every re-render.
 
 The effects run after the Browser is Painted and if they update a state a re-render is made again.
-The effects have an optional clean-up function that runs before the effect is called again and after the component in unmounted.
+The effects have an optional clean-up function that runs before the effect is called again and after the component is unmounted.
 The clean-up function is declared in a return statement.
 
+useEffect hook should be avoided in these cases:
+1) Responding to a user event. An event handler function should be used instead.
+2) Fetching data on component mount. For little apps it's okay but is preferred to use libraries like React Query.
+3) Synchronizing state changes with one another. Using derived state and event handlers is advices.
+
+EFFECTS SHOULD BE USED AS A LAST RESORT.
 
 =======================================
 Reference
@@ -140,6 +149,26 @@ The best practice is to create the context in its own file with all the logic an
 
 
 =======================================
+Memo
+=======================================
+useMemo is a hook used to memoize values between renders.
+3 big cases:
+1) Memoizing props to prevent wasted renders (together with memo()).
+2) Memoizing values to avoid expensive re-calculations on every render.
+3) Memoizing values that are used in depency array of another hook.
+
+
+=======================================
+Callback
+=======================================
+useCallback is a hook used to memoize functions between renders.
+3 big cases:
+1) Memoizing props to prevent wasted renders (together with memo()).
+2) Memoizing values to avoid expensive re-calculations on every render.
+3) Memoizing values that are used in depency array of another hook.
+
+
+=======================================
 Importing CSS files
 =======================================
 import "css_file_location_and_name.css"
@@ -181,6 +210,12 @@ Thinking in React
 2. Building the static app.
 3. Thinking about the state.
 4. Data flow.
+
+
+====================================
+memo()
+====================================
+The memo() function is used to memoize components. It receives a component as an argument and returns the component.
 
 
 ====================================
@@ -249,6 +284,24 @@ export default ComponentName;
 
 
 ====================================
+Performance Optimization
+====================================
+1) Prevent wasted renders: -
+    - Passing elements as children or regular props => React creates props (and therefore children) first and while the
+        component is re-rendering thus preventing the child element to re-render.
+    - Memoization => is to cache the results of pure function that executed the same argument again.
+        - memo => memoize components.
+        - useMemo => memoize objects.
+        - useCallback => memoize functions.
+2) Improve app speed / responsiveness: useMemo, useCallback, useTransition.
+3) Reduce bundle size: use less third-party packages, code splitting and lazy loading.
+    - With the lazy() function provided by react each page can be its own JavaScript file that will only be downloaded
+    when the user needs it:
+        const PageName = lazy( () => import("/address/of/the/file"));
+        It is suggested to use the "Suspense component" to have a fallback page to show while the requested pages are loading.
+
+
+====================================
 Libraries
 ====================================
 
@@ -257,3 +310,53 @@ To route different components to different views.
 
 CSS MODULES:
 To use CSS by component.
+
+REDUX:
+To manage global state.
+
+Recommended small libraries:
+Json-Server: Simulates an external server.
+DatePicker: Provides a calendar visual API.
+Leaflet: Maps.
+
+
+
+
+=================================================================================
+
+====================================
+React Router
+====================================
+
+====================================
+CSS Modules
+====================================
+
+
+====================================
+Redux
+====================================
+Redux is like the useReducer hook.
+Main differences:
+It uses a "store" to hold all the different "reducers".
+It uses an action creator to automatize the actions.
+
+Old:
+Main differences:
+The initial state is declared in the reducer function as a default value for the state argument.
+The default case on the switch statement should return the state.
+
+The store is created with the "createStore()" function import that received the reducer function.
+The store has the "dispatch" method that acts as the dispatch of the useReducer.
+.getState() --> store method that returns the state object.
+
+combineReducers() --> it's a function that combines all reducers in the store.
+
+
+Redux structure is to divide the code in feature folders, with each piece of code related inside its own folder.
+
+---- React Redux ----
+React reduce use a Provider component that will provide all state to the app:
+<Provider store="store name"></Provider>
+To use and connect Redux with React the "useSelector" hook.
+

@@ -1,4 +1,7 @@
-export default function FinishScreen({points, maxPossiblePoints, highscore, dispatch}) {
+import {useQuizContext} from "../context/QuizContext";
+
+export default function FinishScreen() {
+    const {points, maxPossiblePoints, highscore, dispatch} = useQuizContext();
     const percentage = (points / maxPossiblePoints) * 100;
 
     let emoji;
