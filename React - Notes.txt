@@ -341,6 +341,21 @@ Main differences:
 It uses a "store" to hold all the different "reducers".
 It uses an action creator to automatize the actions.
 
+New Redux is called Redux Toolkit.
+Main additions:
+Mutable code is now allowed.
+Action creators are automatically created.
+Thunk middleware and DevTools are automatically setup.
+
+The store is created with the "configureStore()" function that receives as a parameter an object with all the reducers.
+The new "configureStore" function already sets up the middleware Thunk and the DevTools, so there's no need to invoke them.
+
+To create slices the "createSlice" function is used. It creates the action creators automatically, doesn't need the switch
+createSlice receives as an argument an object with the options of name, initialState, and reducers:
+    const nameSlice = createSlice({name: "reducerName", initialState: "initial state", reducers: {...}});
+statement and the default case is handled automatically, and allows the use of mutable logic.
+The reducer will be on ".reducer" method of the created slice, and the action creator functions on the ".actions" method.
+
 Old:
 Main differences:
 The initial state is declared in the reducer function as a default value for the state argument.
