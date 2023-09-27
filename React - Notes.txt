@@ -302,6 +302,19 @@ Performance Optimization
 
 
 ====================================
+How to plan and build a React application
+====================================
+1) Gather application requirements and features.
+2) Divide the application into pages.
+    - Think about the overall and page-level UI.
+    - Break the desired UI into components.
+    - Desing and built a static version (no state yet).
+3) Divide the application into feature categories.
+    - Think about state management + date flow.
+4) Decide on waht libraries to use.
+
+
+====================================
 Libraries
 ====================================
 
@@ -384,3 +397,4 @@ Middleware is passed as an argument to the applyMiddleware function, and that fu
 const storeName = createStore(reducer, applyMiddleware(thunk)) --> this is the case the middleware is Thunk.
 
 When a action function returns a function, Redux know that function is the middleware.
+If an action requires a side effect, that it should be created in a prepare() function then passed to the reducer.
