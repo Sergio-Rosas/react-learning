@@ -340,6 +340,20 @@ Leaflet: Maps.
 ====================================
 React Router
 ====================================
+With React Router 6 there is a new way to import the routes and handle fetching inside routes.
+It is installed with "npm install react-router-dom@latest".
+The new function is called "createBrowserRouter" and it receives as argument an array of objects with the routes.
+
+It is used with the "RouterProvider" component that has the "router" prop to pass the router created.
+
+To fetch data we need to create a loader() function inside the component that will use it. Then provide it to the router.
+Then use the "useLoaderData" hook to retrieve that information.
+
+To know where is the fetch process in the loader, the "useNavigation" hook will have that information.
+
+To display errors, the "errorElement" key should be specified in the router. To see the error message the hook "useRouteError"
+is provided.
+
 
 ====================================
 CSS Modules
