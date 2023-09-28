@@ -354,6 +354,11 @@ To know where is the fetch process in the loader, the "useNavigation" hook will 
 To display errors, the "errorElement" key should be specified in the router. To see the error message the hook "useRouteError"
 is provided.
 
+React Router has it's own component for using forms, the "Form" component that needs the "action()" function to make the request work.
+
+With the "redirect" function, redirection can be handled inside components.
+
+The hook useActionData can be used to validate the form data.
 
 ====================================
 CSS Modules

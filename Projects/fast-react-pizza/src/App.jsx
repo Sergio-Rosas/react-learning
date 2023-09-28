@@ -1,48 +1,49 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./ui/Home.jsx";
-import Menu, {loader as menuLoader} from "./features/menu/Menu.jsx";
+import Menu, { loader as menuLoader } from "./features/menu/Menu.jsx";
 import Cart from "./features/cart/Cart.jsx";
-import Order, {loader as orderLoader} from "./features/order/Order.jsx";
-import CreateOrder from "./features/order/CreateOrder.jsx";
+import Order, { loader as orderLoader } from "./features/order/Order.jsx";
+import CreateOrder, {
+    action as createOrderAction,
+} from "./features/order/CreateOrder.jsx";
 import AppLayout from "./ui/AppLayout.jsx";
 import Error from "./ui/Error";
 
 const router = createBrowserRouter([
     {
-        element: <AppLayout/>,
-        errorElement: <Error/>,
+        element: <AppLayout />,
+        errorElement: <Error />,
 
         children: [
             {
                 path: "/",
-                element: <Home/>,
+                element: <Home />,
             },
             {
                 path: "/menu",
-                element: <Menu/>,
+                element: <Menu />,
                 loader: menuLoader,
-                errorElement: <Error/>,
+                errorElement: <Error />,
             },
             {
                 path: "/cart",
-                element: <Cart/>,
+                element: <Cart />,
             },
             {
                 path: "/order/new",
-                element: <CreateOrder/>
+                element: <CreateOrder />,
+                action: createOrderAction,
             },
             {
                 path: "/order/:orderId",
-                element: <Order/>,
+                element: <Order />,
                 loader: orderLoader,
-                errorElement: <Error/>,
+                errorElement: <Error />,
             },
-        ]
+        ],
     },
 ]);
 
 export default function App() {
-    return (
-        <RouterProvider router={router}/>
-    )
+    return <RouterProvider router={router} />;
 }
