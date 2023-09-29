@@ -388,6 +388,8 @@ createSlice receives as an argument an object with the options of name, initialS
 statement and the default case is handled automatically, and allows the use of mutable logic.
 The reducer will be on ".reducer" method of the created slice, and the action creator functions on the ".actions" method.
 
+Controlled fields, like the ones in forms, should have their own state. It's bad practice to connect those to the Redux store.
+
 Old:
 Main differences:
 The initial state is declared in the reducer function as a default value for the state argument.
