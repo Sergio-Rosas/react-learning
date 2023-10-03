@@ -27,6 +27,7 @@ function ComponentName(props) {
 
 Props are immutable (read-only).
 Props are external data passed by the parent component.
+Each component can have default props. One way to do it is with the "defaultProps" method.
 Receiving new props causes the component to re-render.
 States are mutable.
 
@@ -324,13 +325,24 @@ To route different components to different views.
 CSS MODULES:
 To use CSS by component.
 
+TAILWIND CSS:
+Atomic CSS library.
+
+STYLED COMPONENTS:
+To use CSS inside a component creating a component that has the CSS.
+
 REDUX:
 To manage global state.
+
+REACT-REDUX:
+To manage global state on React.
+
 
 Recommended small libraries:
 Json-Server: Simulates an external server.
 DatePicker: Provides a calendar visual API.
 Leaflet: Maps.
+React Icons: for icons.
 
 
 
@@ -359,6 +371,10 @@ React Router has it's own component for using forms, the "Form" component that n
 With the "redirect" function, redirection can be handled inside components.
 
 The hook useActionData can be used to validate the form data.
+
+To fetch data from another page without redirecting the "useFetcher" hook is used.
+To load data ".load" method it's used with the address where we want to fetch the data.
+To update data the "<fetcher.Form>" component should wrap the component we want to update the data
 
 ====================================
 CSS Modules
@@ -403,6 +419,10 @@ combineReducers() --> it's a function that combines all reducers in the store.
 
 
 Redux structure is to divide the code in feature folders, with each piece of code related inside its own folder.
+Redux recommends that any logic related to manipulate the state to use it in a component has to be done in the slice.
+
+If an action function needs another action function the latter can be called with the caseReducers function:
+    sliceName.caseReducers.actionName();
 
 ---- React Redux ----
 React reduce use a Provider component that will provide all state to the app:
@@ -414,8 +434,32 @@ To use the dispatch function the useDispatch hook needs to be imported. Inside t
 Allows to do thing after the dispatch function is called but before the values are written on the store.
 This is the perfect place for asynchronous code, API calls, timers, loggings, and side effects.
 
+With Redux Toolkit the Thunk can be used with "createAsyncThunk" function --> createAsyncThunk("name", asyncFunction).
+The new Thunk async function will return 3 states: pending, fulfilled, and rejected.
+
+To hand those new cases, a new entry should be created in the slice, the extraReducers object that will have a function as a value
+with the builder argument that can create those new cases:
+
+createSlice({
+    name: "sliceName",
+    initialState: initialStateVariable,
+    reducers: {...}
+
+    extraReducers: (builder) =>
+        builder
+            .addcase(
+                asyncFunctionName.pending,
+                (state, action) => {...}
+            .addcase(
+                asyncFunctionName.fulfilled,
+                (state, action) => {...}
+            .addcase(
+                asyncFunctionName.rejected,
+                (state, action) => {...}
+}
+
 Middleware is passed as an argument to the applyMiddleware function, and that function is passed to the store when created:
 const storeName = createStore(reducer, applyMiddleware(thunk)) --> this is the case the middleware is Thunk.
 
-When a action function returns a function, Redux know that function is the middleware.
+When an action function returns a function, Redux know that function is the middleware.
 If an action requires a side effect, that it should be created in a prepare() function then passed to the reducer.
