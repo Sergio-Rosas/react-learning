@@ -337,12 +337,19 @@ To manage global state.
 REACT-REDUX:
 To manage global state on React.
 
+SUPABASE:
+To have a backend without creating one.
+
+REACT QUERY:
+A library to manage remote state.
+
 
 Recommended small libraries:
 Json-Server: Simulates an external server.
 DatePicker: Provides a calendar visual API.
 Leaflet: Maps.
 React Icons: for icons.
+Date-fns: To work with dates.
 
 
 
@@ -463,3 +470,14 @@ const storeName = createStore(reducer, applyMiddleware(thunk)) --> this is the c
 
 When an action function returns a function, Redux know that function is the middleware.
 If an action requires a side effect, that it should be created in a prepare() function then passed to the reducer.
+
+
+
+============================================
+React Query
+============================================
+To start React Query a query client needs to be created with the "new QueryClient()" formula. Inside it, many options can be modified.
+To use it on the application the component called "QueryClientProvider" should wrap the components that will need the remote state
+and specify the client.
+The devtools are an npm package that should be the first child of the "QueryClientProvider" and it's called "ReactQueryDevtools".
+To make a query the "useQuery" hook is used with the "queryKey" and "queryFn" keys to provide the key and the query function.
