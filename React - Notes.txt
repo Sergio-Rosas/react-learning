@@ -350,6 +350,8 @@ DatePicker: Provides a calendar visual API.
 Leaflet: Maps.
 React Icons: for icons.
 Date-fns: To work with dates.
+React Hot Toast: To display toasts (alerts).
+React Hook Form: To handle Forms.
 
 
 
@@ -481,3 +483,5 @@ To use it on the application the component called "QueryClientProvider" should w
 and specify the client.
 The devtools are an npm package that should be the first child of the "QueryClientProvider" and it's called "ReactQueryDevtools".
 To make a query the "useQuery" hook is used with the "queryKey" and "queryFn" keys to provide the key and the query function.
+To mutate a state the "useMutate" hook should be used. It should contain an object with the mutationFn, the onSuccess, and the onError
+keys, all of which receive a function as value.
