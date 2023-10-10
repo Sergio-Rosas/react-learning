@@ -309,10 +309,39 @@ How to plan and build a React application
 2) Divide the application into pages.
     - Think about the overall and page-level UI.
     - Break the desired UI into components.
-    - Desing and built a static version (no state yet).
+    - Design and built a static version (no state yet).
 3) Divide the application into feature categories.
     - Think about state management + date flow.
-4) Decide on waht libraries to use.
+4) Decide on what libraries to use.
+
+
+===================================
+Advanced React
+===================================
+
+RENDER PROPS PATTERN:
+Consist in passing the "render" prop that will contain a function. That way a component can reuse state and JSX.
+Before hooks, this was the way to reuse logic. No longer used very often.
+
+HIGH ORDER COMPONENT PATTERN:
+To enhance components that otherwise can be manipulated. It consists of passing a component to a "with" starting component,
+and just return another component. No longer used very often.
+
+COMPOUND COMPONENT PATTERN:
+Creating a complex UI with various components without needing props, component that only make sense with each other.
+It is advanced and recommended.
+Steps to create it:
+1) Create a context.
+2) Create the parent component.
+3) Create child components to help implement the common tasks.
+Optional 4) Add child components as properties to parent component.
+
+===================================
+Misc
+===================================
+createPortal --> Renders the JSX on any part of the DOM without changing the component place in the component tree. It is  used
+to avoid CSS conflicts, primarily with overflow: hidden.
+cloneElement --> Clones an element.
 
 
 ====================================
@@ -352,9 +381,6 @@ React Icons: for icons.
 Date-fns: To work with dates.
 React Hot Toast: To display toasts (alerts).
 React Hook Form: To handle Forms.
-
-
-
 
 =================================================================================
 
