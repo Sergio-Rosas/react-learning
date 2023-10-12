@@ -1,10 +1,11 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
+import {PAGE_SIZE} from "../utils/constants.js";
 
-export async function getBookings({ filter, sortBy }) {
+export async function getBookings({ filter, sortBy, page }) {
     let query = supabase
         .from("bookings")
-        .select("*, cabins(name), guests(fullName, email)");
+        .select("*, cabins(name), guests(fullName, email)", {count: "exact"});
 
     // FILTER
     if (filter) {
@@ -18,13 +19,21 @@ export async function getBookings({ filter, sortBy }) {
         });
     }
 
-    const { data, error } = await query;
+    // PAGINATION
+    if (page) {
+        const from = (page - 1) * PAGE_SIZE;
+        const to = from + PAGE_SIZE - 1;
+
+        query = query.range(from, to)
+    }
+
+    const { data, error, count } = await query;
 
     if (error) {
         throw new Error("Bookings could not be loaded");
     }
 
-    return data;
+    return {data, count};
 }
 
 export async function getBooking(id) {
@@ -75,7 +84,7 @@ export async function getStaysAfterDate(date) {
     return data;
 }
 
-// Activity means that there is a check in or a check out today
+// Activity means that there is a check in or a check-out today
 export async function getStaysTodayActivity() {
     const { data, error } = await supabase
         .from("bookings")
