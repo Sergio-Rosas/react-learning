@@ -372,6 +372,12 @@ To have a backend without creating one.
 REACT QUERY:
 A library to manage remote state.
 
+RECHARTS:
+To creat charts.
+
+REACT ERROR BOUNDARY:
+To handle React errors that occur at rendering.
+
 
 Recommended small libraries:
 Json-Server: Simulates an external server.
